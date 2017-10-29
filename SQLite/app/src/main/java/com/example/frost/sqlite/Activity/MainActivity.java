@@ -1,16 +1,14 @@
 package com.example.frost.sqlite.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import com.example.frost.sqlite.HelperPackage.DatabaseHelper;
 import com.example.frost.sqlite.HelperPackage.ProductAdapter;
-import com.example.frost.sqlite.ProductPackage.ControlToProduct;
 import com.example.frost.sqlite.ProductPackage.Product;
-import com.example.frost.sqlite.HelperPackage.JsonHelper;
 import com.example.frost.sqlite.R;
 
 import java.util.ArrayList;
@@ -20,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Product> products;
     ListView listView;
-    Context context;
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        context = getApplicationContext();
-        products = JsonHelper.importFromJSON(context);
+        db = new DatabaseHelper(this);
+        products = db.getAllProducts();
         if(products==null) {
             products = new ArrayList<>();
         }
@@ -36,11 +34,6 @@ public class MainActivity extends AppCompatActivity {
     public void CreateClick(View view){
         Intent intent = new Intent(this,AddCategoryAndName.class);
         startActivity(intent);
-    }
-
-    public void SortClick(View view){
-        ControlToProduct.SortProductsList(products);
-        ShowProducts();
     }
 
     public void SearchClickAct(View view){

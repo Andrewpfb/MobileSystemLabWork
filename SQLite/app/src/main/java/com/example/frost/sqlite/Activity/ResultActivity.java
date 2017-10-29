@@ -8,13 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.frost.sqlite.HelperPackage.BitmapHelper;
+import com.example.frost.sqlite.HelperPackage.DatabaseHelper;
 import com.example.frost.sqlite.ProductPackage.ControlToProduct;
 import com.example.frost.sqlite.ProductPackage.Product;
 import com.example.frost.sqlite.R;
 
 public class ResultActivity extends AppCompatActivity {
     private TextView name,category,price,count;
-    private ImageView imageView;
     private String bitmapBase64;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class ResultActivity extends AppCompatActivity {
         category = (TextView) findViewById(R.id.RL_categoryTV);
         price = (TextView) findViewById(R.id.RL_priceTV);
         count = (TextView) findViewById(R.id.RL_countTV);
-        imageView = (ImageView) findViewById(R.id.RL_imgView);
+        ImageView imageView = (ImageView) findViewById(R.id.RL_imgView);
 
         Intent extras = getIntent();
         if(extras!=null){
@@ -54,7 +54,7 @@ public class ResultActivity extends AppCompatActivity {
     public void SaveClick(View view){
         Product product = new Product(name.getText().toString(),category.getText().toString(),
                 Double.parseDouble(price.getText().toString()),Integer.parseInt(count.getText().toString()),bitmapBase64);
-        ControlToProduct.AddProductToList(product,getApplicationContext());
+        ControlToProduct.AddProductToList(new DatabaseHelper(this),product);
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }

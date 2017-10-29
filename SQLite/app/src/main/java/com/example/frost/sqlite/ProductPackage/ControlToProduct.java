@@ -1,13 +1,6 @@
 package com.example.frost.sqlite.ProductPackage;
 
-import android.content.Context;
-
-import com.example.frost.sqlite.HelperPackage.JsonHelper;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import com.example.frost.sqlite.HelperPackage.DatabaseHelper;
 
 /**
  * Created by frost on 14.10.2017.
@@ -15,35 +8,19 @@ import java.util.List;
 
 public class ControlToProduct {
 
-    private static List<Product> products;
-    public static void AddProductToList(Product product,Context context){
-        products = JsonHelper.importFromJSON(context);
-        if(products == null){
-            products = new ArrayList<>();
-        }
-        products.add(product);
-        JsonHelper.exportToJSON(context,products);
+    public static void AddProductToList(DatabaseHelper db, Product product){
+        db.addProduct(product);
     }
-    public static void DeleteProductFromList(String productName,Context context){
-        products = JsonHelper.importFromJSON(context);
-        for(Product product:products){
-            if(product.getName().compareTo(productName)==0){
-                products.remove(product);
-            }
-        }
-        JsonHelper.exportToJSON(context,products);
+    public static void DeleteProductFromList(DatabaseHelper db,Product product){
+       db.deleteProduct(product);
     }
-    public static Product SearchProductInList(String name,List<Product> productLists){
-        Product tmpProduct = null;
-        for(Product product:productLists){
-            if(product.getName().compareTo(name)==0){
-                tmpProduct=product;
-            }
-        }
-        return tmpProduct;
+    public static Product SearchProductInList(DatabaseHelper db,String name){
+        return db.getProductByName(name);
     }
-    public static void SortProductsList(List<Product> productLists){
-        ProductSort ps = new ProductSort();
-        Collections.sort(productLists,ps);
+    public static void UpdateProduct(DatabaseHelper db, Product product){
+        db.updateProduct(product);
+    }
+    public static void DeleteAllProduct(DatabaseHelper db){
+        db.deleteAllProducts();
     }
 }

@@ -6,12 +6,32 @@ package com.example.frost.sqlite.ProductPackage;
 
 public class Product {
 
+    private int id;
     private String name;
     private String category;
     private Double price;
     private Integer count;
     private String imagePath;
 
+    public Product(){}
+    public Product(int id,String name,String category, Double price ,Integer count, String imagePath){
+        this.id = id;
+        this.category=category;
+        this.price=price;
+        this.name=name;
+        this.imagePath=imagePath;
+        this.count=count;
+    }
+    public Product(String name,String category, Double price ,Integer count, String imagePath){
+        this.category=category;
+        this.price=price;
+        this.name=name;
+        this.imagePath=imagePath;
+        this.count=count;
+    }
+
+    public int getId(){return id;}
+    public void setId(int id){this.id = id;}
     public String getCategory() {
         return category;
     }
@@ -39,14 +59,6 @@ public class Product {
     public Integer getCount(){return count;}
     public void setCount(Integer count) {
         this.count = count;
-    }
-
-    public Product(String name,String category, Double price ,Integer count, String imagePath){
-        this.category=category;
-        this.price=price;
-        this.name=name;
-        this.imagePath=imagePath;
-        this.count=count;
     }
 
     @Override
