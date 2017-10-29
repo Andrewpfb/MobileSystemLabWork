@@ -21,11 +21,11 @@ public class FavoriteItemActivity extends AppCompatActivity {
         ListView favoriteListView = (ListView) findViewById(R.id.FI_ProductsList);
         List<Product> products;
         DatabaseHelper db = new DatabaseHelper(this);
-        //products = db.getFavoriteProducts();
-       /* if(products==null){
+        products = db.getFavoriteProducts();
+        if(products==null){
             products = new ArrayList<>();
         }
-        ProductAdapter productAdapter = new ProductAdapter(this,R.layout.item,products);
-        favoriteListView.setAdapter(productAdapter);*/
+        ProductAdapter productAdapter = new ProductAdapter(this,R.layout.f_item,products);
+        favoriteListView.setAdapter(productAdapter);
     }
 }
