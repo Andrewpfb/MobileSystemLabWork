@@ -117,7 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
     @Override
     public List<Product> getAllProducts() {
         List<Product> productList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABLE_PRODUCTS + "ORDER BY " + KEY_NAME;
+        String selectQuery = "SELECT * FROM " + TABLE_PRODUCTS + " ORDER BY " + KEY_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery,null);
