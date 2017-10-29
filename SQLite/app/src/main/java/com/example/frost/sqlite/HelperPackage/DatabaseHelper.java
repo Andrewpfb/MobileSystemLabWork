@@ -27,6 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
     private static final String KEY_PRICE = "price";
     private static final String KEY_COUNT = "count";
     private static final String KEY_IMAGE_PATH = "image_path";
+    private static final  String KEY_FAVORITE = "favorite";
 
     public DatabaseHelper (Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -37,7 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " + TABLE_PRODUCTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT, "
                 + KEY_CATEGORY + " TEXT," + KEY_PRICE + " REAL,"
-                + KEY_COUNT + " INTEGER, " + KEY_IMAGE_PATH + " TEXT" + ")";
+                + KEY_COUNT + " INTEGER, " + KEY_IMAGE_PATH + " TEXT"
+                + KEY_FAVORITE + " INTEGER " + ")";
         db.execSQL(CREATE_PRODUCTS_TABLE);
     }
     @Override

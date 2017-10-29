@@ -34,16 +34,19 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void SearchClick(View view){
-        product = ControlToProduct.SearchProductInList(new DatabaseHelper(this),searchName.getText().toString());
-        if(product!=null) {
-            nameTV.setText(product.getName());
-            categoryTV.setText(product.getCategory());
-            priceTV.setText(product.getPrice().toString());
-            countTV.setText(product.getCount().toString());
-            imageView.setImageBitmap(BitmapHelper.StringToBitMap(product.getImagePath()));
-        }
-        else {
-            Toast.makeText(getApplicationContext(),"Product doesn't find",Toast.LENGTH_LONG).show();
+        try {
+            product = ControlToProduct.SearchProductInList(new DatabaseHelper(this), searchName.getText().toString());
+            if (product != null) {
+                nameTV.setText(product.getName());
+                categoryTV.setText(product.getCategory());
+                priceTV.setText(product.getPrice().toString());
+                countTV.setText(product.getCount().toString());
+                imageView.setImageBitmap(BitmapHelper.StringToBitMap(product.getImagePath()));
+            } else {
+                Toast.makeText(getApplicationContext(), "Product doesn't find", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Product doesn't find", Toast.LENGTH_LONG).show();
         }
     }
     public void DeleteClick(View view){

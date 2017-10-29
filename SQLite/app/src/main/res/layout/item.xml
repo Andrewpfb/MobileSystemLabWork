@@ -64,5 +64,11 @@
             android:id="@+id/iImage"
             android:layout_width="fill_parent"
             android:layout_height="125dp" />
+
+        <CheckBox
+            android:id="@+id/I_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to favorite" />
     </LinearLayout>
 </FrameLayout>
