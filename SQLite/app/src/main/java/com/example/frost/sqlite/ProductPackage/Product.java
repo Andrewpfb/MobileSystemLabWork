@@ -12,7 +12,7 @@ public class Product {
     private Double price;
     private Integer count;
     private String imagePath;
-    private boolean favorite;
+    private Integer favorite;
 
     public Product(){}
     public Product(int id,String name,String category, Double price ,Integer count, String imagePath){
@@ -22,7 +22,7 @@ public class Product {
         this.name=name;
         this.imagePath=imagePath;
         this.count=count;
-        this.favorite = false;
+        this.favorite = 0;
     }
     public Product(String name,String category, Double price ,Integer count, String imagePath){
         this.category=category;
@@ -30,7 +30,7 @@ public class Product {
         this.name=name;
         this.imagePath=imagePath;
         this.count=count;
-        this.favorite = false;
+        this.favorite = 0;
     }
 
     public int getId(){return id;}
@@ -63,8 +63,8 @@ public class Product {
     public void setCount(Integer count) {
         this.count = count;
     }
-    public boolean getFavorite() {return favorite;}
-    public void setFavorite(boolean favorite){this.favorite = favorite;}
+    public Integer getFavorite() {return favorite;}
+    public void setFavorite(Integer favorite){this.favorite = favorite>0?1:0;}
 
     @Override
     public String toString() {

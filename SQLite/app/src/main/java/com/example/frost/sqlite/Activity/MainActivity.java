@@ -1,7 +1,6 @@
 package com.example.frost.sqlite.Activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.example.frost.sqlite.ProductPackage.Product;
 import com.example.frost.sqlite.R;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,12 +28,6 @@ public class MainActivity extends AppCompatActivity {
         if(products==null) {
             products = new ArrayList<>();
         }
-        /*products.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });*/
         ShowProducts();
     }
 

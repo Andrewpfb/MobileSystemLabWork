@@ -143,6 +143,32 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
     }
 
     @Override
+    public List<Product> getFavoriteProducts() {
+        List<Product> productList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABLE_PRODUCTS+ " WHERE " + KEY_FAVORITE + "=1" + " ORDER BY " + KEY_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                Product product = new Product();
+                product.setId(cursor.getInt(0));
+                product.setName(cursor.getString(1));
+                product.setCategory(cursor.getString(2));
+                product.setPrice(cursor.getDouble(3));
+                product.setCount(cursor.getInt(4));
+                product.setImagePath(cursor.getString(5));
+                productList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return productList;
+    }
+
+    @Override
     public int getProductsCount() {
         String countQuery = "SELECT * FROM " + TABLE_PRODUCTS;
         SQLiteDatabase db = this.getReadableDatabase();

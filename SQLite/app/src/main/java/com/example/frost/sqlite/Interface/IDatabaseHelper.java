@@ -13,6 +13,7 @@ public interface IDatabaseHelper {
     Product getProduct(int id);
     Product getProductByName(String name);
     List<Product> getAllProducts();
+    List<Product> getFavoriteProducts();
     int getProductsCount();
     int updateProduct(Product product);
     void deleteProduct(Product product);
