@@ -19,7 +19,8 @@
         <activity android:name=".Activity.AddCategoryAndName" />
         <activity android:name=".Activity.AddPriceAndCountAndImg" />
         <activity android:name=".Activity.ResultActivity" />
-        <activity android:name=".Activity.SearchActivity"></activity>
+        <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.FavoriteAct"></activity>
     </application>
 
 </manifest>

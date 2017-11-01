@@ -3,7 +3,6 @@ package com.example.frost.sqlite.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.StandaloneActionMode;
 import android.view.View;
 import android.widget.ListView;
 
@@ -18,7 +17,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private List<Product> products;
-    ListView listView;
     DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         if(products==null) {
             products = new ArrayList<>();
         }
-        ShowProducts();
+        ListView listView = (ListView) findViewById(R.id.MA_ProductsList);
+        ProductAdapter productAdapter = new ProductAdapter(this,R.layout.item,products, db);
+        listView.setAdapter(productAdapter);
     }
 
     public void CreateClick(View view){
@@ -43,13 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void FavoriteClick(View view){
-        Intent intent = new Intent(this, FavoriteItemActivity.class);
+        Intent intent = new Intent(this,FavoriteAct.class);
         startActivity(intent);
-    }
-
-    public void ShowProducts(){
-        listView = (ListView) findViewById(R.id.MA_ProductsList);
-        ProductAdapter productAdapter = new ProductAdapter(this,R.layout.item,products);
-        listView.setAdapter(productAdapter);
     }
 }

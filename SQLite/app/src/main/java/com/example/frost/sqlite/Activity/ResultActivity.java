@@ -53,7 +53,7 @@ public class ResultActivity extends AppCompatActivity {
     }
     public void SaveClick(View view){
         Product product = new Product(name.getText().toString(),category.getText().toString(),
-                Double.parseDouble(price.getText().toString()),Integer.parseInt(count.getText().toString()),bitmapBase64);
+                Double.parseDouble(price.getText().toString()),Integer.parseInt(count.getText().toString()),bitmapBase64,0);
         ControlToProduct.AddProductToList(new DatabaseHelper(this),product);
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);

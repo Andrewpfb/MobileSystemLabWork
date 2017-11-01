@@ -56,4 +56,8 @@ public class SearchActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    public void CancelClick(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,31 +21,69 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private LayoutInflater inflater;
     private int layout;
     private List<Product> products;
+    private DatabaseHelper db;
 
-    public ProductAdapter(Context context, int resource, List<Product> products){
+    public ProductAdapter(Context context, int resource, List<Product> products, DatabaseHelper db){
         super(context,resource,products);
         this.products = products;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
+        this.db = db;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = inflater.inflate(this.layout, parent, false);
-        TextView name = (TextView) view.findViewById(R.id.iName);
-        TextView category = (TextView) view.findViewById(R.id.iCategory);
-        TextView price = (TextView) view.findViewById(R.id.iPrice);
-        TextView count = (TextView) view.findViewById(R.id.iCount);
-        ImageView imageView = (ImageView) view.findViewById(R.id.iImage);
+        final ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = inflater.inflate(this.layout, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
-        Product product = products.get(position);
+        final Product product = products.get(position);
 
-        name.setText(product.getName());
-        category.setText(product.getCategory());
-        price.setText(product.getPrice().toString());
-        count.setText(product.getCount().toString());
-        imageView.setImageBitmap(BitmapHelper.StringToBitMap(product.getImagePath()));
+        viewHolder.nameView.setText(product.getName());
+        viewHolder.categoryView.setText(product.getCategory());
+        viewHolder.priceView.setText(product.getPrice().toString());
+        viewHolder.countView.setText(product.getCount().toString());
+        viewHolder.imageView.setImageBitmap(BitmapHelper.StringToBitMap(product.getImagePath()));
+        if (viewHolder.checkBoxView != null) {
+            viewHolder.checkBoxView.setChecked(product.getFavorite() == 1 ? true : false);
+        }
 
-        return view;
+        if (viewHolder.checkBoxView != null) {
+            viewHolder.checkBoxView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (viewHolder.checkBoxView.isChecked()) {
+                        product.setFavorite(1);
+                        viewHolder.nameView.setText("1");
+                    } else {
+                        product.setFavorite(0);
+                        viewHolder.nameView.setText("0");
+                    }
+                    db.updateProduct(product);
+                }
+            });
+        }
+        return convertView;
+    }
+
+    private class ViewHolder{
+        final ImageView imageView;
+        final TextView nameView,categoryView, priceView, countView;
+        final CheckBox checkBoxView;
+        ViewHolder(View view){
+            nameView = (TextView) view.findViewById(R.id.iName);
+            categoryView = (TextView) view.findViewById(R.id.iCategory);
+            priceView = (TextView) view.findViewById(R.id.iPrice);
+            countView = (TextView) view.findViewById(R.id.iCount);
+            imageView = (ImageView) view.findViewById(R.id.iImage);
+            checkBoxView = (CheckBox) view.findViewById(R.id.I_checkBox);
+        }
     }
 }
+

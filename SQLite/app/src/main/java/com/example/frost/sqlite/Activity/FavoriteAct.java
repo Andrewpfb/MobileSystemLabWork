@@ -12,10 +12,11 @@ import com.example.frost.sqlite.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteItemActivity extends AppCompatActivity {
+public class FavoriteAct extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorite_item);
         ListView favoriteListView = (ListView) findViewById(R.id.FI_ProductsList);
@@ -25,7 +26,7 @@ public class FavoriteItemActivity extends AppCompatActivity {
         if(products==null){
             products = new ArrayList<>();
         }
-        ProductAdapter productAdapter = new ProductAdapter(this,R.layout.f_item,products);
+        ProductAdapter productAdapter = new ProductAdapter(this,R.layout.f_item,products,db);
         favoriteListView.setAdapter(productAdapter);
     }
 }

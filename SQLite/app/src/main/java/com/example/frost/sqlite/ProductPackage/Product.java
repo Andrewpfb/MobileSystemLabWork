@@ -15,22 +15,22 @@ public class Product {
     private Integer favorite;
 
     public Product(){}
-    public Product(int id,String name,String category, Double price ,Integer count, String imagePath){
+    public Product(int id,String name,String category, Double price ,Integer count, String imagePath,Integer favorite){
         this.id = id;
         this.category=category;
         this.price=price;
         this.name=name;
         this.imagePath=imagePath;
         this.count=count;
-        this.favorite = 0;
+        this.favorite = favorite;
     }
-    public Product(String name,String category, Double price ,Integer count, String imagePath){
+    public Product(String name,String category, Double price ,Integer count, String imagePath, Integer favorite){
         this.category=category;
         this.price=price;
         this.name=name;
         this.imagePath=imagePath;
         this.count=count;
-        this.favorite = 0;
+        this.favorite = favorite;
     }
 
     public int getId(){return id;}
@@ -68,6 +68,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return this.category + "\n" + this.name + "\n" + this.price + "\n" + this.count + "\n" + this.imagePath;
+        return this.category + "\n" + this.name + "\n" + this.price + "\n" + this.count + "\n" + this.imagePath + "\n" + this.getFavorite();
     }
 }

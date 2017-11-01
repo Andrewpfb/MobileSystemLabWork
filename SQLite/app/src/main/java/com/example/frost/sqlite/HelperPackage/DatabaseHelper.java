@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
     private static final String KEY_PRICE = "price";
     private static final String KEY_COUNT = "count";
     private static final String KEY_IMAGE_PATH = "image_path";
-    private static final  String KEY_FAVORITE = "favorite";
+    private static final String KEY_FAVORITE = "favorite";
 
     public DatabaseHelper (Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         String CREATE_PRODUCTS_TABLE = "CREATE TABLE " + TABLE_PRODUCTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT, "
                 + KEY_CATEGORY + " TEXT," + KEY_PRICE + " REAL,"
-                + KEY_COUNT + " INTEGER, " + KEY_IMAGE_PATH + " TEXT"
+                + KEY_COUNT + " INTEGER, " + KEY_IMAGE_PATH + " TEXT, "
                 + KEY_FAVORITE + " INTEGER " + ")";
         db.execSQL(CREATE_PRODUCTS_TABLE);
     }
@@ -47,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCTS);
         onCreate(db);
     }
+
 
     @Override
     public void addProduct(Product product) {
@@ -57,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         values.put(KEY_PRICE, product.getPrice());
         values.put(KEY_COUNT, product.getCount());
         values.put(KEY_IMAGE_PATH, product.getImagePath());
+        values.put(KEY_FAVORITE, product.getFavorite());
 
         db.insert(TABLE_PRODUCTS, null, values);
         db.close();
@@ -68,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
 
         Cursor cursor = db.query(
                 TABLE_PRODUCTS,
-                new String[]{KEY_ID, KEY_NAME,KEY_CATEGORY,KEY_PRICE,KEY_COUNT,KEY_IMAGE_PATH},
+                new String[]{KEY_ID, KEY_NAME,KEY_CATEGORY,KEY_PRICE,KEY_COUNT,KEY_IMAGE_PATH,KEY_FAVORITE},
                  KEY_ID + "=?",
                 new String[]{String.valueOf(id)},
                 null,
@@ -82,7 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         }
 
         Product product = new Product(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
-                cursor.getDouble(3),cursor.getInt(4), cursor.getString(5));
+                cursor.getDouble(3),cursor.getInt(4), cursor.getString(5),cursor.getInt(6));
 
         cursor.close();
         db.close();
@@ -95,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
 
         Cursor cursor = db.query(
                 TABLE_PRODUCTS,
-                new String[]{KEY_ID, KEY_NAME,KEY_CATEGORY,KEY_PRICE,KEY_COUNT,KEY_IMAGE_PATH},
+                new String[]{KEY_ID, KEY_NAME,KEY_CATEGORY,KEY_PRICE,KEY_COUNT,KEY_IMAGE_PATH,KEY_FAVORITE},
                 KEY_NAME + "=?",
                 new String[]{String.valueOf(name)},
                 null,
@@ -109,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         }
 
         Product product = new Product(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
-                cursor.getDouble(3),cursor.getInt(4), cursor.getString(5));
+                cursor.getDouble(3),cursor.getInt(4), cursor.getString(5),cursor.getInt(6));
 
         cursor.close();
         db.close();
@@ -133,6 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
                 product.setPrice(cursor.getDouble(3));
                 product.setCount(cursor.getInt(4));
                 product.setImagePath(cursor.getString(5));
+                product.setFavorite(cursor.getInt(6));
                 productList.add(product);
             } while (cursor.moveToNext());
         }
@@ -159,6 +162,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
                 product.setPrice(cursor.getDouble(3));
                 product.setCount(cursor.getInt(4));
                 product.setImagePath(cursor.getString(5));
+                product.setFavorite(cursor.getInt(6));
                 productList.add(product);
             } while (cursor.moveToNext());
         }
@@ -181,7 +185,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
     }
 
     @Override
-    public int updateProduct(Product product) {
+    public void updateProduct(Product product) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -190,8 +194,9 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHelper 
         values.put(KEY_PRICE, product.getPrice());
         values.put(KEY_COUNT, product.getCount());
         values.put(KEY_IMAGE_PATH, product.getImagePath());
-
-        return db.update(TABLE_PRODUCTS, values, KEY_ID + " =?", new String[]{String.valueOf(product.getId())});
+        values.put(KEY_FAVORITE, product.getFavorite());
+        db.update(TABLE_PRODUCTS, values, KEY_ID + " =?", new String[]{String.valueOf(product.getId())});
+        db.close();
     }
 
     @Override

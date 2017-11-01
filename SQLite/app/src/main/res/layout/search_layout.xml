@@ -54,7 +54,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.965"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="456dp" />
+        tools:layout_editor_absoluteY="456dp"
+        android:onClick="CancelClick"/>
 
     <TextView
         android:id="@+id/SL_categoryTV"

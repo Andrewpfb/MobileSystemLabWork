@@ -15,7 +15,7 @@ public interface IDatabaseHelper {
     List<Product> getAllProducts();
     List<Product> getFavoriteProducts();
     int getProductsCount();
-    int updateProduct(Product product);
+    void updateProduct(Product product);
     void deleteProduct(Product product);
     void deleteAllProducts();
 }
