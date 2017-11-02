@@ -1,4 +1,4 @@
-package com.example.frost.sqlite.HelperPackage;
+package com.example.firebase.HelperPackage;
 
 /**
  * Created by frost on 28.10.2017.
@@ -12,8 +12,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.frost.sqlite.ProductPackage.Product;
-import com.example.frost.sqlite.R;
+import com.example.firebase.ProductPackage.Product;
+import com.example.firebase.R;
 
 import java.util.List;
 
@@ -60,8 +60,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
                     if (viewHolder.checkBoxView.isChecked()) {
                         product.setFavorite(1);
+                        viewHolder.nameView.setText("1");
                     } else {
                         product.setFavorite(0);
+                        viewHolder.nameView.setText("0");
                     }
                     db.updateProduct(product);
                 }

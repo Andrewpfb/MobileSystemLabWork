@@ -1,4 +1,4 @@
-package com.example.frost.sqlite.Activity;
+package com.example.firebase.Activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import com.example.frost.sqlite.HelperPackage.DatabaseHelper;
-import com.example.frost.sqlite.HelperPackage.ProductAdapter;
-import com.example.frost.sqlite.ProductPackage.Product;
-import com.example.frost.sqlite.R;
+import com.example.firebase.HelperPackage.DatabaseHelper;
+import com.example.firebase.HelperPackage.ProductAdapter;
+import com.example.firebase.ProductPackage.Product;
+import com.example.firebase.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +25,25 @@ public class MainActivity extends AppCompatActivity {
     private List<Product> products;
     private ProgressBar progressBar;
     private ListView listView;
+    private FirebaseAuth mFireBaseAuth;
+    private FirebaseUser mFireBaseUser;
     DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mFireBaseAuth = FirebaseAuth.getInstance();
+        mFireBaseUser = mFireBaseAuth.getCurrentUser();
+        if(mFireBaseUser==null){
+            startActivity(new Intent(this,SignInActivity.class));
+            finish();
+            return;
+        }else {
+            Toast.makeText(this, "Hello, " + mFireBaseUser.getDisplayName(), Toast.LENGTH_LONG).show();
+        }
         db = new DatabaseHelper(this);
         listView = (ListView) findViewById(R.id.MA_ProductsList);
         progressBar = (ProgressBar) findViewById(R.id.MA_progressBar);
-        progressBar.setVisibility(progressBar.VISIBLE);
         /*try {
             ShowFunction();
             TimeUnit.SECONDS.sleep(5);
@@ -73,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Product> result){
             ProductAdapter productAdapter = new ProductAdapter(getApplicationContext(),R.layout.item,products,db);
             listView.setAdapter(productAdapter);
-            progressBar.setVisibility(progressBar.INVISIBLE);
         }
         @Override
         protected List<Product> doInBackground(Void... params) {
