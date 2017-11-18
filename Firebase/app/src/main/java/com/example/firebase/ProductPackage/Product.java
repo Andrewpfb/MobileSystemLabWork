@@ -6,7 +6,6 @@ package com.example.firebase.ProductPackage;
 
 public class Product {
 
-    private int id;
     private String name;
     private String category;
     private Double price;
@@ -15,15 +14,7 @@ public class Product {
     private Integer favorite;
 
     public Product(){}
-    public Product(int id,String name,String category, Double price ,Integer count, String imagePath,Integer favorite){
-        this.id = id;
-        this.category=category;
-        this.price=price;
-        this.name=name;
-        this.imagePath=imagePath;
-        this.count=count;
-        this.favorite = favorite;
-    }
+
     public Product(String name,String category, Double price ,Integer count, String imagePath, Integer favorite){
         this.category=category;
         this.price=price;
@@ -33,8 +24,6 @@ public class Product {
         this.favorite = favorite;
     }
 
-    public int getId(){return id;}
-    public void setId(int id){this.id = id;}
     public String getCategory() {
         return category;
     }

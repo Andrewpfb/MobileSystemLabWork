@@ -21,14 +21,14 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private LayoutInflater inflater;
     private int layout;
     private List<Product> products;
-    private DatabaseHelper db;
+   // private DatabaseHelper db;
 
-    public ProductAdapter(Context context, int resource, List<Product> products, DatabaseHelper db){
+    public ProductAdapter(Context context, int resource, List<Product> products){//, DatabaseHelper db){
         super(context,resource,products);
         this.products = products;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
-        this.db = db;
+        //this.db = db;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -65,7 +65,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
                         product.setFavorite(0);
                         viewHolder.nameView.setText("0");
                     }
-                    db.updateProduct(product);
+                   // db.updateProduct(product);
                 }
             });
         }

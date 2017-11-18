@@ -8,8 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.firebase.HelperPackage.BitmapHelper;
-import com.example.firebase.HelperPackage.DatabaseHelper;
-import com.example.firebase.ProductPackage.ControlToProduct;
+import com.example.firebase.HelperPackage.FirebaseHelper;
 import com.example.firebase.ProductPackage.Product;
 import com.example.firebase.R;
 
@@ -54,7 +53,7 @@ public class ResultActivity extends AppCompatActivity {
     public void SaveClick(View view){
         Product product = new Product(name.getText().toString(),category.getText().toString(),
                 Double.parseDouble(price.getText().toString()),Integer.parseInt(count.getText().toString()),bitmapBase64,0);
-        ControlToProduct.AddProductToList(new DatabaseHelper(this),product);
+        FirebaseHelper.Write(product);
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }

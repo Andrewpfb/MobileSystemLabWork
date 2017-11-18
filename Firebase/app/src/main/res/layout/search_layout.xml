@@ -28,12 +28,30 @@
         android:layout_row="26"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.965"
         android:onClick="DeleteClick"/>
+
+    <Button
+        android:id="@+id/SL_updBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_column="0"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_row="26"
+        android:onClick="UpdateClick"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965" />
 
     <Button
         android:id="@+id/SL_cancelBtn"
@@ -57,54 +75,58 @@
         tools:layout_editor_absoluteY="456dp"
         android:onClick="CancelClick"/>
 
-    <TextView
+    <EditText
         android:id="@+id/SL_categoryTV"
-        android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_width="361dp"
+        android:layout_height="43dp"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.339" />
+        app:layout_constraintVertical_bias="0.322"
+        app:layout_constraintHorizontal_bias="0.695" />
 
-    <TextView
+    <EditText
         android:id="@+id/SL_countTV"
-        android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_width="363dp"
+        android:layout_height="39dp"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.608" />
+        app:layout_constraintVertical_bias="0.605"
+        app:layout_constraintHorizontal_bias="0.761" />
 
-    <TextView
+    <EditText
         android:id="@+id/SL_priceTV"
-        android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_width="362dp"
+        android:layout_height="52dp"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.476" />
+        app:layout_constraintVertical_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.727" />
 
-    <TextView
+    <EditText
         android:id="@+id/SL_nameTV"
-        android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_width="360dp"
+        android:layout_height="40dp"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintVertical_bias="0.193"
+        app:layout_constraintHorizontal_bias="0.666" />
 
     <EditText
         android:id="@+id/SL_nameET"
-        android:layout_width="265dp"
-        android:layout_height="49dp"
+        android:layout_width="275dp"
+        android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -113,11 +135,12 @@
         android:inputType="textPersonName"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.038"
+        tools:layout_editor_absoluteX="7dp" />
 
     <Button
         android:id="@+id/SL_searchBtn"
@@ -139,7 +162,7 @@
     <TextView
         android:id="@+id/textView12"
         android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_height="20dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -149,12 +172,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.543"
+        app:layout_constraintHorizontal_bias="0.666" />
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_width="358dp"
+        android:layout_height="20dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -164,12 +188,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.391"
+        app:layout_constraintHorizontal_bias="0.8" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_height="20dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -179,12 +204,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
+        app:layout_constraintVertical_bias="0.258"
+        app:layout_constraintHorizontal_bias="0.666" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="356dp"
-        android:layout_height="28dp"
+        android:layout_width="360dp"
+        android:layout_height="19dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -194,6 +220,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintVertical_bias="0.134"
+        app:layout_constraintHorizontal_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
