@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import example.firebaseui.HelperPackage.FavoriteProductAdapter;
 import example.firebaseui.HelperPackage.ProductAdapter;
 import example.firebaseui.ProductPackage.Product;
 import example.firebaseui.R;
@@ -21,7 +22,10 @@ public class FavoriteAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favorite_item);
         ListView favoriteListView = (ListView) findViewById(R.id.FI_ProductsList);
-        List<Product> products;
+        if(MainActivity.checkProducts!=null) {
+            FavoriteProductAdapter favoriteAdapter = new FavoriteProductAdapter(this,R.layout.f_item,MainActivity.checkProducts);
+            favoriteListView.setAdapter(favoriteAdapter);
+        }
     }
 
     public void CancelClick(View view){

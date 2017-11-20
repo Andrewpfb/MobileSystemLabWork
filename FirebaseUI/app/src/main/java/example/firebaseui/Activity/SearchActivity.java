@@ -65,7 +65,6 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-               // Toast.makeText(SearchActivity.C, "Product doesn't find", Toast.LENGTH_LONG).show();
             }
         });
     }

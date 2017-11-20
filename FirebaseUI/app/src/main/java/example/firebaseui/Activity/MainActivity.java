@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Product> products;
     private ListView listView;
+
+    public static List<Product> checkProducts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         final Product product = productAdapter.getItem(info.position);
         switch (item.getItemId()){
             case R.id.view:
-                viewItem();
+                viewItem(product);
                 return true;
             case R.id.edit:
                 editItem(product);
@@ -88,8 +91,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void viewItem() {
+    private void viewItem(Product product) {
+        Boolean check = false;
         Toast.makeText(this, "View", Toast.LENGTH_SHORT).show();
+        checkProducts = new ArrayList<>();
+        for (Product tmp : products){
+            if(tmp.getFavorite()==1){
+                checkProducts.add(tmp);
+                check=true;
+            }
+        }
+        if(!check){
+            checkProducts.add(product);
+        }
+        Intent intent = new Intent(this,FavoriteAct.class);
+        startActivity(intent);
     }
 
     private void editItem(Product product) {
@@ -104,11 +120,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteItem(Product product) {
-        Toast.makeText(this, "Del" + product.toString(), Toast.LENGTH_SHORT).show();
         SearchActivity.DeleteByName(product.getName());
-        //onCreate();
-        //products.remove(product);
-        //updateUI();
+        Intent tmp = getIntent();
+        overridePendingTransition(0,0);
+        tmp.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0,0);
+        startActivity(tmp);
     }
 
     private void ShowFunction() {
@@ -129,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                //Toast.makeText(MainActivity.this, "Removed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
