@@ -1,9 +1,12 @@
 package example.firebaseui.Activity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,6 +69,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.create_settings:
+                startActivity(new Intent(this,AddCategoryAndName.class));
+                return true;
+            case R.id.edit_settings:
+                Toast.makeText(this, "EDIT!", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.logout_settings:
+                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(this,Start.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu,v,menuInfo);
 
@@ -86,14 +112,22 @@ public class MainActivity extends AppCompatActivity {
             case R.id.delete:
                 deleteItem(product);
                 return true;
+            case R.id.copy:
+                copyItem(product);
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
+    private void copyItem(Product product) {
+        ClipboardManager clipboard = (ClipboardManager) getApplicationContext().getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("",product.toString());
+        clipboard.setPrimaryClip(clip);
+    }
+
     private void viewItem(Product product) {
         Boolean check = false;
-        Toast.makeText(this, "View", Toast.LENGTH_SHORT).show();
         checkProducts = new ArrayList<>();
         for (Product tmp : products){
             if(tmp.getFavorite()==1){
@@ -120,7 +154,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteItem(Product product) {
-        SearchActivity.DeleteByName(product.getName());
+        Toast.makeText(this, "Del", Toast.LENGTH_SHORT).show();
+        Boolean check = false;
+        checkProducts = new ArrayList<>();
+        for (Product tmp : products){
+            if(tmp.getFavorite()==1){
+                checkProducts.add(tmp);
+                check=true;
+            }
+        }
+        if(!check){
+            SearchActivity.DeleteByName(product.getName());
+        }
+        else {
+            SearchActivity.DeleteArray();
+        }
         Intent tmp = getIntent();
         overridePendingTransition(0,0);
         tmp.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

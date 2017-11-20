@@ -6,4 +6,6 @@
         android:title="Edit" />
     <item android:id="@+id/delete"
         android:title="Delete" />
+    <item android:id="@+id/copy"
+        android:title="Copy to bufer" />
 </menu>

@@ -57,6 +57,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return this.category + "\n" + this.name + "\n" + this.price + "\n" + this.count + "\n" + this.imagePath + "\n" + this.getFavorite();
+        return this.category + "\n" + this.name + "\n" + this.price + "\n" + this.count + "\n" + this.getFavorite();
     }
 }
