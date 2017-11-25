@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Material Design</string>
+    <string name="item_name">Element name</string>
+    <string name="image_icon_desc">Element icon</string>
+
+    <string name="fragment_layout">Это макет fragment_info.xml</string>
+    <string name="fragment_grid">Это fragment_email.xml</string>
+
+    <string-array name="drawer_items">
+        <item>Grid</item>
+        <item>Layout</item>
+    </string-array>
+</resources>
