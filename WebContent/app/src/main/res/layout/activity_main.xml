@@ -8,5 +8,5 @@
     <fragment android:id="@+id/contentFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="example.webcontent.ProgressFragment" />
+        android:name="example.webcontent.Fragments.ProgressFragment" />
 </RelativeLayout>

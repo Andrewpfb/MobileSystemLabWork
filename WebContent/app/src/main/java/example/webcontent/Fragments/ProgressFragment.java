@@ -1,4 +1,4 @@
-package example.webcontent;
+package example.webcontent.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.AsyncTask;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import example.webcontent.Activities.Currency;
+import example.webcontent.Activities.ViewPageActivity;
+import example.webcontent.Adapters.DataAdapter;
+import example.webcontent.Models.News;
+
+import example.webcontent.R;
+import example.webcontent.RSS.SaxFeedParser;
+import example.webcontent.Utils.StaticLinkStorage;
 
 public class ProgressFragment extends Fragment{
     View view;
@@ -33,6 +43,13 @@ public class ProgressFragment extends Fragment{
         contentView = (TextView) view.findViewById(R.id.progressText);
         contentView.setVisibility(View.VISIBLE);
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        Button goCur = (Button) view.findViewById(R.id.CurrencyBtn);
+        goCur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),Currency.class));
+            }
+        });
         new ProgressTask().execute("https://habrahabr.ru/rss/interesting/");
         return view;
     }

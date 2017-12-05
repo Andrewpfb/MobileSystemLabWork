@@ -1,12 +1,14 @@
-package example.webcontent;
+package example.webcontent.RSS;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import static example.webcontent.BaseFeedParser.*;
+import static example.webcontent.RSS.BaseFeedParser.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import example.webcontent.Models.News;
 
 /**
  * Created by frost on 05.12.2017.

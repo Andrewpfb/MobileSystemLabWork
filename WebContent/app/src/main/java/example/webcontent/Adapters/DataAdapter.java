@@ -1,17 +1,17 @@
-package example.webcontent;
+package example.webcontent.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
+
+import example.webcontent.Models.News;
+import example.webcontent.R;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
     private LayoutInflater inflater;
@@ -20,7 +20,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
     public static OnItemClickListener listener;
 
 
-    DataAdapter(Context context, List<News> news) {
+    public DataAdapter(Context context, List<News> news) {
         this.news = news;
         this.inflater = LayoutInflater.from(context);
     }

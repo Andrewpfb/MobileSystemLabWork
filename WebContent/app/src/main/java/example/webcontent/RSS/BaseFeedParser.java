@@ -1,4 +1,4 @@
-package example.webcontent;
+package example.webcontent.RSS;
 
 import java.io.IOException;
 import java.io.InputStream;

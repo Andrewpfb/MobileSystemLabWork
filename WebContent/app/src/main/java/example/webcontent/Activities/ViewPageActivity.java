@@ -1,9 +1,8 @@
-package example.webcontent;
+package example.webcontent.Activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.BaseBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +16,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import example.webcontent.Activities.MainActivity;
+import example.webcontent.R;
 
 public class ViewPageActivity extends AppCompatActivity {
     WebView webView;

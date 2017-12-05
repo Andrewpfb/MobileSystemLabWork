@@ -1,9 +1,11 @@
-package example.webcontent;
+package example.webcontent.RSS;
 
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import example.webcontent.Models.News;
 
 /**
  * Created by frost on 05.12.2017.
@@ -11,7 +13,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 public class SaxFeedParser extends BaseFeedParser {
 
-    protected SaxFeedParser(String feedUrl){
+    public SaxFeedParser(String feedUrl){
         super(feedUrl);
     }
 

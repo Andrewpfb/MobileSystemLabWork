@@ -1,7 +1,9 @@
-package example.webcontent;
+package example.webcontent.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import example.webcontent.R;
 
 public class MainActivity extends AppCompatActivity {
 

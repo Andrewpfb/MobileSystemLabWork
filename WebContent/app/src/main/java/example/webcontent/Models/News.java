@@ -1,4 +1,4 @@
-package example.webcontent;
+package example.webcontent.Models;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class News {
     static SimpleDateFormat FORMATTER =
-            new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
+            new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
     private String title;
     private Date dateTime;
     private URL link;
@@ -30,9 +30,6 @@ public class News {
     }
 
     public void setDateTime(String dateTime) {
-        while (!dateTime.endsWith("00")){
-            dateTime += "0";
-        }
         try {
             this.dateTime = FORMATTER.parse(dateTime.trim());
         } catch (ParseException e) {
