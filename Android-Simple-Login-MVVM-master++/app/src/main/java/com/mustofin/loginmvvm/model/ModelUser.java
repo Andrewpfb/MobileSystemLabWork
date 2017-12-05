@@ -14,11 +14,16 @@ public class ModelUser implements Parcelable{
     public ModelUser(String username, String password) {
         this.username = username;
         this.password = password;
+        NewUser(username,password);
     }
 
     public ModelUser(Parcel in) {
         username = in.readString();
         password = in.readString();
+    }
+    public void NewUser(String username,String password){
+        this.username = username;
+        this.password = password;
     }
 
     public static final Creator<ModelUser> CREATOR = new Creator<ModelUser>() {

@@ -20,4 +20,10 @@ public class MainViewModel {
     public String getPassword(){
         return user.password;
     }
+    public void setUser(String username, String password){
+        this.user.username = username;
+        this.user.password = password;
+        ModelUser modelUser = new ModelUser();
+        modelUser.NewUser(username,password);
+    }
 }
