@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
+
+    <fragment android:id="@+id/contentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="example.webcontent.ProgressFragment" />
+</RelativeLayout>
