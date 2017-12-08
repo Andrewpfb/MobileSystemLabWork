@@ -21,6 +21,13 @@ android {
     dataBinding {
         enabled = true
     }
+
+    android{
+        lintOptions{
+            abortOnError false
+            lintConfig file('./qa-check/lint.xml')
+        }
+    }
 }
 
 dependencies {
