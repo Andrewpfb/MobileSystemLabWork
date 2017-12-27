@@ -26,7 +26,7 @@ public class GetModelUserMVMUnitTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-    }
+    }//технология, кторая эмулирует сложные объекты.
 
     @Test
     public void test_GetUsernameMainVM(){

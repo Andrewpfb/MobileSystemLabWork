@@ -61,7 +61,7 @@ public class ProgressFragment extends Fragment{
             if(newses==null){
                 newses = new ArrayList<>();
             }
-
+//здесь начинается парсинг rss
             try {
                 SaxFeedParser saxFeedParser = new SaxFeedParser(path[0]);
                 newses = saxFeedParser.parse();

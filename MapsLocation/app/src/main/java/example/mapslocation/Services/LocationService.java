@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import example.mapslocation.Helpers.JsonHelper;
+import example.mapslocation.MapsActivity;
 import example.mapslocation.Models.LocationInfo;
 import example.mapslocation.Utils.CommonLocationList;
 
@@ -49,6 +50,7 @@ public class LocationService extends Service {
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
+            //слушатель перемещения.
             locationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
@@ -77,12 +79,28 @@ public class LocationService extends Service {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             }
             try {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        1000 * 1, 1, locationListener);
-               /* locationManager.requestLocationUpdates(
-                        LocationManager.NETWORK_PROVIDER, 1000 * 1, 1,
-                        locationListener);*/
-            } catch (Exception e) {
+
+                if (!MapsActivity.secOrMetr) {
+                    if (MapsActivity.gpsOrWifi) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                                1000 * 1, 1, locationListener);
+                    } else {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.NETWORK_PROVIDER, 1000 * 1, 1,
+                                locationListener);
+                    }
+                } else {
+                    if (MapsActivity.gpsOrWifi) {
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, locationListener);
+                    } else {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.NETWORK_PROVIDER, 0, 1,
+                                locationListener);
+
+                    }
+                }
+            }
+            catch (Exception e) {
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         return START_STICKY;

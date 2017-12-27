@@ -29,27 +29,30 @@ import javax.net.ssl.HttpsURLConnection;
 public class DownloadService extends Service {
 
     DownloadBinder binder = new DownloadBinder();
-    URL url;
-    String fileName="content.xml";
+    String url1;
+    String fileName="content5.xml";
 
     public void onCreate() {
         super.onCreate();
         Toast.makeText(this, "Service Create", Toast.LENGTH_SHORT).show();
-        new ProgressTask().execute("http://www.nbrb.by/API/ExRates/Rates?Periodicity=0");
+        new ProgressTask().execute(url1);
     }
 
     public IBinder onBind(Intent arg0) {
         Toast.makeText(this, "Service Bind", Toast.LENGTH_SHORT).show();
+        url1 = arg0.getStringExtra("url");
         return binder;
     }
 
     public void onRebind(Intent intent) {
         super.onRebind(intent);
+        url1 = intent.getStringExtra("url");
         Toast.makeText(this, "Service Rebind", Toast.LENGTH_SHORT).show();
     }
 
     public boolean onUnbind(Intent intent) {
         Toast.makeText(this, "Service Unbind", Toast.LENGTH_SHORT).show();
+        url1 = intent.getStringExtra("url");
         return super.onUnbind(intent);
     }
 
@@ -66,8 +69,8 @@ public class DownloadService extends Service {
     private File getExternalPath() {
         return(new File(Environment.getExternalStorageDirectory(), fileName));
     }
-     public void setUrl(String url) throws MalformedURLException {
-         this.url = new URL(url);
+     public void setUrl(String url){
+         this.url1 = url;
      }
     private class ProgressTask extends AsyncTask<String, Void, String> {
         HttpURLConnection urlConnection = null;
@@ -76,7 +79,8 @@ public class DownloadService extends Service {
         @Override
         protected String doInBackground(String... params) {
             try {
-                URL url = new URL(params[0]);
+               // URL url = new URL(params[0]);
+                URL url = new URL(url1);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");

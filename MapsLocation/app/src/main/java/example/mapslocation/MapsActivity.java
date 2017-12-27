@@ -38,10 +38,10 @@ import example.mapslocation.Utils.CommonLocationList;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Button startBtn, stopBtn, downBtn;
+    private Button startBtn, stopBtn, downBtn,secOrMetrBtn, gpsOrWifiBtn;
     private static final int REQUEST_ACCESS_FINE_LOCATION = 10001;
     private static final String ACCESS_FINE_LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
-
+    public static boolean secOrMetr = false, gpsOrWifi = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startBtn = (Button) findViewById(R.id.startBtn);
         stopBtn = (Button) findViewById(R.id.stopBtn);
         downBtn = (Button) findViewById(R.id.downBtn);
+        secOrMetrBtn = (Button) findViewById(R.id.SecOrMetr);
+        gpsOrWifiBtn = (Button) findViewById(R.id.GpsOrWifi);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +85,92 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),DownloadActivity.class));
             }
+        });
+
+        gpsOrWifiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(gpsOrWifi) {
+                    gpsOrWifi = false;
+                    Toast.makeText(MapsActivity.this, "GPS", Toast.LENGTH_SHORT).show();
+                    stopService(new Intent(getApplicationContext(), LocationService.class));
+                    if (isPermissionGranted(ACCESS_FINE_LOCATION_PERMISSION)) {
+                        Thread myThread = new Thread(
+                                new Runnable() {
+                                    public void run() {
+                                        startService(new Intent(getApplicationContext(), LocationService.class));
+                                    }
+                                }
+                        );
+                        myThread.start();
+                    } else {
+                        Toast.makeText(MapsActivity.this, "This application needs access to the your location", Toast.LENGTH_SHORT).show();
+                        requestPermission(ACCESS_FINE_LOCATION_PERMISSION, REQUEST_ACCESS_FINE_LOCATION);
+                    }
+                }
+                else{
+                    gpsOrWifi = true;
+                    Toast.makeText(MapsActivity.this, "Wifi", Toast.LENGTH_SHORT).show();
+                    stopService(new Intent(getApplicationContext(), LocationService.class));
+                    if (isPermissionGranted(ACCESS_FINE_LOCATION_PERMISSION)) {
+                        Thread myThread = new Thread(
+                                new Runnable() {
+                                    public void run() {
+                                        startService(new Intent(getApplicationContext(), LocationService.class));
+                                    }
+                                }
+                        );
+                        myThread.start();
+                    } else {
+                        Toast.makeText(MapsActivity.this, "This application needs access to the your location", Toast.LENGTH_SHORT).show();
+                        requestPermission(ACCESS_FINE_LOCATION_PERMISSION, REQUEST_ACCESS_FINE_LOCATION);
+                    }
+                }
+            }
+        });
+
+        secOrMetrBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(secOrMetr) {
+                        secOrMetr = false;
+                        Toast.makeText(MapsActivity.this, "Sec", Toast.LENGTH_SHORT).show();
+                        stopService(new Intent(getApplicationContext(), LocationService.class));
+                        if (isPermissionGranted(ACCESS_FINE_LOCATION_PERMISSION)) {
+                            Thread myThread = new Thread(
+                                    new Runnable() {
+                                        public void run() {
+                                            startService(new Intent(getApplicationContext(), LocationService.class));
+                                        }
+                                    }
+                            );
+                            myThread.start();
+                        } else {
+                            Toast.makeText(MapsActivity.this, "This application needs access to the your location", Toast.LENGTH_SHORT).show();
+                            requestPermission(ACCESS_FINE_LOCATION_PERMISSION, REQUEST_ACCESS_FINE_LOCATION);
+                        }
+                    }
+                    else{
+                        secOrMetr = true;
+                        Toast.makeText(MapsActivity.this, "metr", Toast.LENGTH_SHORT).show();
+                        stopService(new Intent(getApplicationContext(), LocationService.class));
+                        if (isPermissionGranted(ACCESS_FINE_LOCATION_PERMISSION)) {
+                            Thread myThread = new Thread(
+                                    new Runnable() {
+                                        public void run() {
+                                            startService(new Intent(getApplicationContext(), LocationService.class));
+                                        }
+                                    }
+                            );
+                            myThread.start();
+                        } else {
+                            Toast.makeText(MapsActivity.this, "This application needs access to the your location", Toast.LENGTH_SHORT).show();
+                            requestPermission(ACCESS_FINE_LOCATION_PERMISSION, REQUEST_ACCESS_FINE_LOCATION);
+                        }
+                    }
+                }
+
+
         });
     }
 

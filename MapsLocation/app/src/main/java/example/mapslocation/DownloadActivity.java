@@ -66,7 +66,10 @@ public class DownloadActivity extends AppCompatActivity {
                     checkPermissions();
                     return;
                 }*/
+                intent.putExtra("url",filePath.getText().toString());
                 bindService(intent,sConn,BIND_AUTO_CREATE);
+                    //downloadService.setUrl("http://www.nbrb.by/API/ExRates/Rates?Periodicity=0");
+
                 startService(intent);
             }
         });
